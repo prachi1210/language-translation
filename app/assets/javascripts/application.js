@@ -20,6 +20,7 @@
 //= require plugins/paginator
 //= require components
 //= require underscore
+//= require_tree
 
 //FIXME by Isuri
 
