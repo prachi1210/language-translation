@@ -39,7 +39,7 @@
 
 class User < ActiveRecord::Base
   
-  attr_accessor :avatar
+  attr_accessor :no_invitation
   mount_uploader :avatar, AvatarUploader
 
   GENGER={male: "Male", female: "Female"}
