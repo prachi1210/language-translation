@@ -55,26 +55,14 @@
             <%= f.label :password_confirmation %>
             <%= f.password_field :password_confirmation, class: "Form-control" %>
         </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-	<div class="Form-group">.
-	     <%= f.label :avatar do %>
-      	     <%= f.file_field :avatar %>
-     	     <%= f.hidden_field :avatar_cache %>
-  	     <% end %>
-  </div>
-=======
-=======
->>>>>>> ec3c9986ce41f69b0c201dcd4e04657450d29200
-	 <div class="Form-group">.
+ <div class="Form-group">.
              <%= f.label :avatar do %>
              <%= f.file_field :avatar %>
              <%= f.hidden_field :avatar_cache %>
              <% end %>
 	  </div>
 
->>>>>>> ec3c9986ce41f69b0c201dcd4e04657450d29200
-        <div>
+       <div>
             <button class="button button--primary" type="submit">Sign Up</button>
             <%- if controller_name != 'sessions' %>
                 <%= link_to "Sign in", new_session_path(resource_name), class: "u-fr links u-links" %>
