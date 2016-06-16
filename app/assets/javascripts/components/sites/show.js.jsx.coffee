@@ -1,9 +1,11 @@
 @SitesShowBox = React.createClass
   getInitialState: ->
+    admins: @props.admins
     site: @props.site
     country: @props.country
     volunteers: @props.volunteers
-    contributors: @props.contributors
+    contributors: @props.contributors 
+    current_user: @props.current_user
     alertVisible: false
 
   handleAlertShow: ->
@@ -13,7 +15,10 @@
 
   handleVolunteerAddition: (userdata) ->
     userdata.act = "volunteer"
+    userdata.act = "admin"
     userdata.site_id = @state.site.id
+    userdata.current_user = @state.current_user
+    userdata.admins = @state.admins
     add_role_url = '/sites/add_role.json'
     $.ajax({
       url: add_role_url
@@ -30,7 +35,10 @@
     })
   handleContributorAddition: (userdata) ->
     userdata.act = "contributor"
+    userdata.act  "admin"
     userdata.site_id = @state.site.id
+    userdata.current_user = @state.current_user
+    userdata.admins = @state.admins
     add_role_url = '/sites/add_role.json'
     $.ajax({
       url: add_role_url
@@ -47,6 +55,8 @@
     })
   handleRoleRemoval: (userdata) ->
     userdata.site_id = @state.site.id
+    userdata.current_user = @state.current_user
+    userdata.admins = @state.admins
     remove_role_url = '/sites/remove_role.json'
     $.ajax({
       url: remove_role_url
@@ -65,7 +75,8 @@
     })
 
   render: ->
-    alert =
+ 
+   alert =
       if @state.alertVisible
         `<Alert bsStyle='danger' onDismiss={this.handleAlertDismiss}>
           <h4>Something's wrong. Please check if you have entered the username correctly</h4>
@@ -84,7 +95,7 @@
       <main>
         <div className="SitesShowBox">
           <h2>{this.state.site.name} <span className="h4">{this.state.country.name}</span></h2>
-          <br/>
+          <br/>             
           {alert}
           <VolunteersList data={this.state.volunteers} onRoleAddition={this.handleVolunteerAddition} onRoleRemoval={this.handleRoleRemoval}/>
           <ContributorsList data={this.state.contributors} onRoleAddition={this.handleContributorAddition} onRoleRemoval={this.handleRoleRemoval}/>
@@ -110,7 +121,7 @@
           <div className="input-group">
             <input type="text" className="form-control" placeholder="New volunteer's username" ref='username'/>
             <span className="input-group-btn">
-              <button onClick={this.handleRoleAddition} className="btn btn-default" type="button">Add!</button>
+              <button onClick={this.handleRoleAddition} className="btn btn-default" type="button">Add</button>
             </span>
           </div>
         </div>
@@ -137,7 +148,7 @@
           <div className="input-group">
             <input type="text" className="form-control" placeholder="New contributor's username" ref='username'/>
             <span className="input-group-btn">
-              <button onClick={this.handleRoleAddition} className="btn btn-default" type="button">Add!</button>
+              <button onClick={this.handleRoleAddition} className="btn btn-default" type="button">Add</button>
             </span>
           </div>
         </div>
