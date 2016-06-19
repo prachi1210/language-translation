@@ -54,6 +54,7 @@
       ).bind(this)
     })
   handleRoleRemoval: (userdata) ->
+    userdata.act = "admin"
     userdata.site_id = @state.site.id
     userdata.current_user = @state.current_user
     userdata.admins = @state.admins
@@ -95,9 +96,10 @@
       <main>
         <div className="SitesShowBox">
           <h2>{this.state.site.name} <span className="h4">{this.state.country.name}</span></h2>
-          <br/>             
+          <br/>
+                      
           {alert}
-          <VolunteersList data={this.state.volunteers} onRoleAddition={this.handleVolunteerAddition} onRoleRemoval={this.handleRoleRemoval}/>
+          <VolunteersList data={this.state.volunteers} current_user={this.state.current_user} onRoleAddition={this.handleVolunteerAddition} onRoleRemoval={this.handleRoleRemoval}/>
           <ContributorsList data={this.state.contributors} onRoleAddition={this.handleContributorAddition} onRoleRemoval={this.handleRoleRemoval}/>
         </div>
        </main>
@@ -111,11 +113,13 @@
     data.act = 'volunteer'
     @props.onRoleRemoval(data)
   render: ->
+    
     clickRemoval = @handleRoleRemoval
     userNodes = @props.data.map((user) ->
       `<ShowUserNode key={user.id} user={user} onRoleRemoval={clickRemoval}/>`)
     `<div className="VolunteersList">
       <h3>Volunteers</h3>
+     
       <ul>
        <div className="col-md-5">
           <div className="input-group">
