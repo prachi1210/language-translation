@@ -1,6 +1,6 @@
 <div class="User-content">
     <h3>Create New Account</h3>
-    <%= devise_error_messages! %>
+
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "Form"}) do |f| %>
         <%= render partial: "shared/error_messages", object: resource %>
 
@@ -39,6 +39,11 @@
                     <%= f.radio_button :gender, 'Female' %> Female
                 </label>
             </div>
+        </div>
+
+        <div class="Form-group">
+             <%= f.label :location %>
+             <%= f.collection_select(:location, Country.all, :name, :name, {include_blank: "None"}, {class: "Form-control"}) %>
         </div>
 
         <div class="Form-group">
