@@ -57,16 +57,7 @@
 
       <main className="UsersIndexBox">
         <div className="AppControls">
-          <div className="AppControls--box AppControls-left">
-            <form className="Form Form--inline AppControls-search">
-              <div className="Form-group">
-                <input type="search" className="Form-control" id="search" name="q" placeholder="Search Members" />
-              </div>
-              <button type="submit" className="btn btn-default icon-search">Search</button>
-            </form>
-          </div>
-
-          <div className="AppControls--box AppControls-middle"></div>
+         <div className="AppControls--box AppControls-middle"></div>
 	 <div> {button} </div>
          </div>
 
@@ -198,6 +189,9 @@
         <li className="CardListTable-cal u-w80px" data-th="Role">
           <div className="CardListTable-content">
             {this.props.role}
+              <a className="btn btn-default" href="/sites"><i className="glyphicon glyphicon-plus"></i></a>
+       
+ 
           </div>
         </li>
      

@@ -38,7 +38,11 @@
 
 
 class User < ActiveRecord::Base
-  
+  def self.search(search)
+    where("location LIKE ?", "%#{search}%")
+    where("email LIKE ?", "%#{search}%")
+  end
+ 
   attr_accessor :no_invitation
   mount_uploader :avatar, AvatarUploader
   GENGER={male: "Male", female: "Female"}
@@ -77,19 +81,7 @@ end
   after_create  :send_invitation
   before_save   :ensure_authentication_token
 
-  # PgSearch
-  pg_search_scope :user_search,
-    against: :tsv_data,
-    using: {
-        tsearch: {
-            dictionary: 'english',
-            any_word: true,
-            prefix: true,
-            tsvector_column: 'tsv_data'
-        }
-    }
-
-  private
+ private
   def send_invitation
     invite! if no_invitation=="0"
   end

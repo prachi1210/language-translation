@@ -1,79 +1,15 @@
 @SitesShowBox = React.createClass
   getInitialState: ->
-    admins: @props.admins
     site: @props.site
     country: @props.country
     volunteers: @props.volunteers
     contributors: @props.contributors 
-    current_user: @props.current_user
     alertVisible: false
 
   handleAlertShow: ->
     @setState({ alertVisible: true })
   handleAlertDismiss: ->
     @setState({ alertVisible: false })
-
-  handleVolunteerAddition: (userdata) ->
-    userdata.act = "volunteer"
-    userdata.act = "admin"
-    userdata.site_id = @state.site.id
-    userdata.current_user = @state.current_user
-    userdata.admins = @state.admins
-    add_role_url = '/sites/add_role.json'
-    $.ajax({
-      url: add_role_url
-      dataType: 'json'
-      type: 'POST'
-      data: userdata
-      success: ((data) ->
-        @setState({volunteers: data.sites}) #'data' is in form {sites: Array[n]}
-      ).bind(this)
-      error: ((xhr, status, err) ->
-        @handleAlertShow()
-        console.error(add_role_url, status, err.toString())
-      ).bind(this)
-    })
-  handleContributorAddition: (userdata) ->
-    userdata.act = "contributor"
-    userdata.act  "admin"
-    userdata.site_id = @state.site.id
-    userdata.current_user = @state.current_user
-    userdata.admins = @state.admins
-    add_role_url = '/sites/add_role.json'
-    $.ajax({
-      url: add_role_url
-      dataType: 'json'
-      type: 'POST'
-      data: userdata
-      success: ((data) ->
-        @setState({contributors: data.sites}) #'data' is in form {sites: Array[n]}
-      ).bind(this)
-      error: ((xhr, status, err) ->
-        @handleAlertShow()
-        console.error(add_role_url, status, err.toString())
-      ).bind(this)
-    })
-  handleRoleRemoval: (userdata) ->
-    userdata.act = "admin"
-    userdata.site_id = @state.site.id
-    userdata.current_user = @state.current_user
-    userdata.admins = @state.admins
-    remove_role_url = '/sites/remove_role.json'
-    $.ajax({
-      url: remove_role_url
-      dataType: 'json'
-      type: 'POST'
-      data: userdata
-      success: ((data) ->
-        if(userdata.act == 'volunteer')
-          @setState({volunteers: data.sites}) #'data' is in form {sites: Array[n]}
-        else if(userdata.act == 'contributor')
-          @setState({contributors: data.sites}) #'data' is in form {sites: Array[n]}
-      ).bind(this)
-      error: ((xhr, status, err) ->
-        console.error(remove_role_url, status, err.toString())
-      ).bind(this)
-    })
 
   render: ->
  
@@ -99,78 +35,41 @@
           <br/>
                       
           {alert}
-          <VolunteersList data={this.state.volunteers} current_user={this.state.current_user} onRoleAddition={this.handleVolunteerAddition} onRoleRemoval={this.handleRoleRemoval}/>
-          <ContributorsList data={this.state.contributors} onRoleAddition={this.handleContributorAddition} onRoleRemoval={this.handleRoleRemoval}/>
+          <VolunteersList data={this.state.volunteers}/>
+          <ContributorsList data={this.state.contributors}/>
         </div>
        </main>
      </div>`
 
 @VolunteersList = React.createClass
-  handleRoleAddition: ->
-    @props.onRoleAddition({username: React.findDOMNode(@refs.username).value.trim(), action: "", site_id: -1})
-    React.findDOMNode(@refs.username).value = ''
-  handleRoleRemoval: (data) ->
-    data.act = 'volunteer'
-    @props.onRoleRemoval(data)
-  render: ->
-    
-    clickRemoval = @handleRoleRemoval
+ render: ->
     userNodes = @props.data.map((user) ->
-      `<ShowUserNode key={user.id} user={user} onRoleRemoval={clickRemoval}/>`)
+      `<ShowUserNode key={user.id} user={user}/>`)
     `<div className="VolunteersList">
       <h3>Volunteers</h3>
      
       <ul>
-       <div className="col-md-5">
-          <div className="input-group">
-            <input type="text" className="form-control" placeholder="New volunteer's username" ref='username'/>
-            <span className="input-group-btn">
-              <button onClick={this.handleRoleAddition} className="btn btn-default" type="button">Add</button>
-            </span>
-          </div>
-        </div>
-        <br/><br/><br/>
-         {userNodes}
+        {userNodes}
       </ul>
     </div>`
 
 @ContributorsList = React.createClass
-  handleRoleAddition: ->
-    @props.onRoleAddition({username: React.findDOMNode(@refs.username).value.trim(), act: "", site_id: -1})
-    React.findDOMNode(@refs.username).value = ''
-  handleRoleRemoval: (data) ->
-    data.act = 'contributor'
-    @props.onRoleRemoval(data)
+
   render: ->
-    clickRemoval = @handleRoleRemoval
     userNodes = @props.data.map((user) ->
-      `<ShowUserNode key={user.id} user={user} onRoleRemoval={clickRemoval}/>`)
+      `<ShowUserNode key={user.id} user={user}/>`)
     `<div className="ContributorsList">
       <h3>Contributors</h3>
       <ul>
-       <div className="col-md-5">
-          <div className="input-group">
-            <input type="text" className="form-control" placeholder="New contributor's username" ref='username'/>
-            <span className="input-group-btn">
-              <button onClick={this.handleRoleAddition} className="btn btn-default" type="button">Add</button>
-            </span>
-          </div>
-        </div>
-        <br/><br/><br/>
-         {userNodes}
+        {userNodes}
       </ul>
     </div>`
 
 @ShowUserNode = React.createClass
-  handleRoleRemoval: ->
-    @props.onRoleRemoval({user_id: @props.user.id, act: "", site_id: -1})
-  render: ->
+ render: ->
     show_url = "/members/" + @props.user.id
     `<li type = "square" className="UserNode">
         <a className="h4" href={show_url}>{this.props.user.username} </a>
-        <button onclick={this.hangleRoleRemoval} className="btn btn-default">
-        <span className="glyphicon glyphicon-remove" /> 
-        </button>
-        <br/><br/>
+       <br/><br/>
     </li>`
     
