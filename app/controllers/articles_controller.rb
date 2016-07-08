@@ -14,12 +14,15 @@ class ArticlesController < ApplicationController
   end
 
   def index
-    if params[:q].blank?
-      @articles = Article.includes(:category, :language).page(params[:page]).per(20)
-    else
-      @articles = Article.includes(:category, :language).article_search(params[:q]).page(params[:page]).per(20)
-    end
+     if params[:search]
+    @articles = Article
+    .where(category_id: Category
+    .where(name: params[:search]))
+  else
+    @articles = Article.all.order('created_at DESC')
   end
+ 
+    end
 
   def create
     @article = Article.new(article_params)

@@ -31,6 +31,5 @@ class Article < ActiveRecord::Base
   validates :picture, presence: true
 
   enum state:   [:draft, :published]
-  # adding search feature
-
-end
+ 
+ end
