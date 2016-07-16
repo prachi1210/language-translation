@@ -15,7 +15,11 @@
 #
 
 class Article < ActiveRecord::Base
-  belongs_to :language
+  
+include PublicActivity::Model
+tracked owner: Proc.new{ |controller, model| controller && controller.current_user }
+
+ belongs_to :language
   belongs_to :category
   has_many :audios
 

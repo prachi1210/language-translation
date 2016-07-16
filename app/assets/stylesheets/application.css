@@ -51,4 +51,18 @@ z-index:9999999;
     color: #468847;
     text-align: left;
  }
+.roop {
+    display:block;
 
+}
+
+.activity {
+width: 1050px;
+border-bottom: solid 1px #ccc;
+padding: 16px 0;
+display:block; 
+em{
+    color: #777;
+    font-size: 12px;
+   }
+}
