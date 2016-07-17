@@ -66,3 +66,25 @@ em{
     font-size: 12px;
    }
 }
+#filterrific_result {
+display:none;
+}
+.box1 {
+background-color: #e3e4e1;
+height:80px;
+padding: 30px 10px 30px 20px;
+}
+.gap{
+height:10px;
+}
+.box2, .box3, .box4{
+display: inline;
+}
+.box2{
+margin:10px 10px 20px 40px;
+}
+.box3{
+margin:400px 480px 50px 50px;
+}
+
+

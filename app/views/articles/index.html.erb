@@ -10,12 +10,7 @@
 <main>
     <div class="AppControls">
         <div class="AppControls--box AppControls-left">
-        <%= form_tag(articles_path, :method => "get", id: "search-form") do %>
-        <%= text_field_tag :search, params[:search], placeholder: "Search Categories" %>
-        <%= submit_tag "Search" %>
-        <% end %> 
-            
-       </div>
+      </div>
 
         <div class="AppControls--box AppControls-middle"></div>
 
@@ -26,9 +21,42 @@
 
     <div class="CardListTable">
         <ul class="CardListTable-body">
-            <%= render partial: 'article', collection: @articles %>
-        </ul>
+             <%= form_for_filterrific @filterrific do |f| %>
+<div class = "box1">
+<div class = "box2">
+   Language
+    <%= f.select(
+      :with_language_id,
+      @filterrific.select_options[:with_language_id],
+      { include_blank: '- Any -' }
+    ) %>
+  </div>
+  <div class="box3">
+   Category
+   <%= f.select(
+    :with_category_id,
+     @filterrific.select_options[:with_category_id],
+     { include_blank: '- Any -' }
+    ) %>
+  </div>
+
+ <div class="box4">
+    <%= link_to(
+      'Reset filters',
+      reset_filterrific_url,
+    ) %>
+  </div>
+</div>
+<div class="gap"></div>
+<% end %>
+<%= render(
+  partial: 'articles/article',
+  locals: { article: @article }
+) %>
+
+       </ul>
     </div>
 
-   
 </main>
+          
+

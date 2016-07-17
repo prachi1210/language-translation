@@ -35,5 +35,23 @@ tracked owner: Proc.new{ |controller, model| controller && controller.current_us
   validates :picture, presence: true
 
   enum state:   [:draft, :published]
- 
+ filterrific(
+
+    available_filters: [
+   :with_language_id,
+   :with_category_id,
+    ]
+  )
+belongs_to :language
+ scope :with_language_id, lambda { |language_ids|
+    where(:language_id => [*language_ids])
+  }
+belongs_to :category
+  scope :with_category_id, lambda { |category_ids|
+    where(:category_id => [*category_ids])
+}
+
+  delegate :name, :to => :language, :prefix => true
+
+
  end

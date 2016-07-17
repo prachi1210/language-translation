@@ -19,5 +19,9 @@ def self.search(search)
   validates :name, presence: true
   # default order when calling the Category model
   default_scope -> { order('created_at DESC') }
+  def self.options_for_select
+  order('LOWER(name)').map { |e| [e.name, e.id] }
+end
+
 end
 

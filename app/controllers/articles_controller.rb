@@ -14,15 +14,23 @@ class ArticlesController < ApplicationController
   end
 
   def index
-     if params[:search]
-    @articles = Article
-    .where(category_id: Category
-    .where(name: params[:search]))
-  else
-    @articles = Article.all.order('created_at DESC')
-  end
- 
+    @filterrific = initialize_filterrific(
+      Article,
+      params[:filterrific],
+      select_options: {
+        with_language_id: Language.options_for_select,
+        with_category_id: Category.options_for_select
+            
+      }
+    ) or return
+      @articles = @filterrific.find.page(params[:page])
+
+    # Respond to html for initial page load and to js for AJAX filter updates.
+    respond_to do |format|
+      format.html
+      format.js
     end
+   end
 
   def create
     @article = Article.new(article_params)
