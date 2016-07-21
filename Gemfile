@@ -94,3 +94,5 @@ group :test, :development do
 end
 
 gem 'memory_test_fix'
+gem 'rails_12factor', group: :production
+ruby '2.2.3'
