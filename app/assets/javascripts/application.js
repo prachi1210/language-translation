@@ -21,6 +21,7 @@
 //= require components
 //= require underscore
 //= require filterrific/filterrific-jquery
+//= require_tree
 //FIXME by Isuri
 
 $(document).ready(function(){
