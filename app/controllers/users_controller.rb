@@ -3,15 +3,13 @@ class UsersController < ApplicationController
   load_and_authorize_resource
 
   def index
-      @users = User.accessible_by(current_ability)
+     @users = User.accessible_by(current_ability)
   if params[:search]
     @users = User.search(params[:search]).order("created_at DESC")
   else
     @users = User.accessible_by(current_ability).order('created_at DESC')
   end
-end
-
-
+ end
 
   def new
     @user = User.new

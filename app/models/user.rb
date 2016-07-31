@@ -43,7 +43,7 @@ tracked owner: Proc.new{ |controller, model| controller && controller.current_us
 
   def self.search(search)
     where("location LIKE ?", "%#{search}%")
-   
+    
   end
  
   attr_accessor :no_invitation
