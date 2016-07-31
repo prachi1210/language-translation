@@ -1,5 +1,5 @@
 	
-        <%= form_tag(users_path, :method => "get", id: "search-form") do %>
+        <%= form_tag(users_path, :method => "get", id: "search-form1") do %>
         <%= text_field_tag :search, params[:search], placeholder: "Search Members" %>
         <%= submit_tag "Search" %>
         <% end %> 
@@ -16,6 +16,3 @@
                     } %>
 
 
-<footer>
-    <%= react_component 'PaginatorSection', {totalPages: @pagination[:total_pages], currentPage: @pagination[:current_page], path: users_path } %>
-</footer>
