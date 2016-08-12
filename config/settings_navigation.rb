@@ -55,6 +55,14 @@ SimpleNavigation::Configuration.run do |navigation|
       end
     end
 
+# Superadmins, Admins have access to Activities..
+    if current_user and current_user.has_any_role? :superadmin, :admin
+      primary.item :activities, "Activities", activities_path
+    end
+
+
+
+
     primary.dom_class = 'nav sidebarNav'
   end
 end
