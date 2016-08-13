@@ -92,4 +92,9 @@ top:100px;
 right:800px;
 z-index:9999999;
 }
-
+.style{
+ padding-right: 100px;
+ width:250px; 
+ max-width:500px; 
+ display: inline-block;
+ }
