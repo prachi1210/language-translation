@@ -60,9 +60,6 @@ SimpleNavigation::Configuration.run do |navigation|
       primary.item :activities, "Activities", activities_path
     end
 
-
-
-
     primary.dom_class = 'nav sidebarNav'
   end
 end
