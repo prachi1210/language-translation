@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
+# adding the filtering of the articles
 gem 'filterrific'
+# generate log file for users
 gem 'public_activity'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails' , '4.2.1'
