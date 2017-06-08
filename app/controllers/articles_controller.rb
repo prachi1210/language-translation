@@ -14,23 +14,12 @@ class ArticlesController < ApplicationController
   end
 
   def index
-    @filterrific = initialize_filterrific(
-      Article,
-      params[:filterrific],
-      select_options: {
-        with_language_id: Language.options_for_select,
-        with_category_id: Category.options_for_select
-            
-      }
-    ) or return
-      @articles = @filterrific.find.page(params[:page])
-
-    # Respond to html for initial page load and to js for AJAX filter updates.
-    respond_to do |format|
-      format.html
-      format.js
+    if params[:q].blank?
+      @articles = Article.includes(:category, :language).page(params[:page]).per(20)
+    else
+      @articles = Article.includes(:category, :language).article_search(params[:q]).page(params[:page]).per(20)
     end
-   end
+  end
 
   def create
     @article = Article.new(article_params)

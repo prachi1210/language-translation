@@ -2,13 +2,7 @@ class LanguagesController < ApplicationController
   load_and_authorize_resource
 
   def index
-   @languages = Language.all
-  if params[:search]
-    @languages = Language.search(params[:search]).order("created_at DESC")
-  else
-    @languages = Language.all.order('created_at DESC')
-  end
-
+    @languages = Language.page(params[:page]).per(20)
   end
 
   def show

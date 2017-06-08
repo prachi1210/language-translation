@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   # Route config for ActiveAdmin
   ActiveAdmin.routes(self)
 
@@ -36,14 +37,13 @@ Rails.application.routes.draw do
       post :revoke_admin,   action: :revoke_admin
     end
   end
-  resources :activities
+
   resources :organizations
 
   resources :countries do
     resources :sites
   end
- 
- 
+
   resources :sites
   # Routes for custom methods (for use with ReactJS)
   post "sites/add_role", to: "sites#add_role"
@@ -69,8 +69,7 @@ Rails.application.routes.draw do
     resources :countries
     resources :categories
     resources :languages
-    resources :sites 
- end
+  end
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'

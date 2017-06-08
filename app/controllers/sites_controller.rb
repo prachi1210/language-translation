@@ -4,13 +4,7 @@ class SitesController < ApplicationController
   def index
     current_user.organization.countries.each do |a|
       @sites << a.sites
-  if params[:search]
-    @sites = Site.search(params[:search]).order("created_at DESC")
-  else
-    @sites << a.sites.order('created_at DESC')
-  end
-
-   end
+    end
     @sites = @sites.page(params[:page]).per(20)
   end
 

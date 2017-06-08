@@ -57,8 +57,6 @@ GEM
     arbre (1.0.3)
       activesupport (>= 3.0.0)
     arel (6.0.3)
-    autoprefixer-rails (6.3.7)
-      execjs
     babel-source (5.8.19)
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
@@ -66,9 +64,6 @@ GEM
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap-sass (3.3.7)
-      autoprefixer-rails (>= 5.2.1)
-      sass (>= 3.3.4)
     bourbon (4.2.4)
       sass (~> 3.4)
       thor (~> 0.19)
@@ -120,8 +115,6 @@ GEM
     factory_girl_rails (4.5.0)
       factory_girl (~> 4.5.0)
       railties (>= 3.0.0)
-    filterrific (2.0.5)
-      rails (>= 3.1.0)
     formtastic (3.1.3)
       actionpack (>= 3.2.13)
     formtastic_i18n (0.4.1)
@@ -160,7 +153,6 @@ GEM
       railties (>= 3.2.0, < 4.99.0)
     metaclass (0.0.4)
     mime-types (2.6.1)
-    mini_magick (4.5.1)
     mini_portile (0.6.2)
     minitest (5.8.0)
     minitest-rails (2.2.0)
@@ -186,11 +178,6 @@ GEM
       arel
     polyamorous (1.2.0)
       activerecord (>= 3.0)
-    public_activity (1.5.0)
-      actionpack (>= 3.0.0)
-      activerecord (>= 3.0)
-      i18n (>= 0.5.0)
-      railties (>= 3.0.0)
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.6.4)
@@ -220,11 +207,6 @@ GEM
       ruby-graphviz (~> 1.2)
     rails-html-sanitizer (1.0.2)
       loofah (~> 2.0)
-    rails_12factor (0.0.3)
-      rails_serve_static_assets
-      rails_stdout_logging
-    rails_serve_static_assets (0.0.4)
-    rails_stdout_logging (0.0.3)
     railties (4.2.1)
       actionpack (= 4.2.1)
       activesupport (= 4.2.1)
@@ -238,8 +220,6 @@ GEM
       i18n
       polyamorous (~> 1.2)
     rdoc (4.2.0)
-    react-bootstrap-rails (0.29.4)
-      rails (>= 3.1)
     react-rails (1.2.0)
       babel-transpiler (>= 0.7.0)
       coffee-script-source (~> 1.8)
@@ -303,7 +283,6 @@ DEPENDENCIES
   active_model_serializers
   activeadmin (~> 1.0.0.pre1)
   annotate
-  bootstrap-sass
   bourbon
   byebug
   cancancan
@@ -316,23 +295,18 @@ DEPENDENCIES
   devise-token_authenticatable (~> 0.4.0)
   devise_invitable (~> 1.5.0)
   factory_girl_rails
-  filterrific
   git
   jbuilder (~> 2.0)
   jquery-rails
   kaminari
   memory_test_fix
-  mini_magick
   minitest-rails
   mocha
   pg
   pg_search
-  public_activity
   quiet_assets
   rails (= 4.2.1)
   rails-erd
-  rails_12factor
-  react-bootstrap-rails
   react-rails (~> 1.0)
   responders
   rolify
@@ -345,8 +319,5 @@ DEPENDENCIES
   web-console (~> 2.0)
   webrat
 
-RUBY VERSION
-   ruby 2.2.3p173
-
 BUNDLED WITH
-   1.12.5
+   1.10.5

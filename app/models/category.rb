@@ -9,19 +9,10 @@
 #
 
 class Category < ActiveRecord::Base
-include PublicActivity::Model
-tracked owner: Proc.new{ |controller, model| controller && controller.current_user }
-  
-def self.search(search)
-    where("name iLIKE ?", "%#{search}%") 
-  end
   has_many :articles
+
   validates :name, presence: true
+
   # default order when calling the Category model
   default_scope -> { order('created_at DESC') }
-  def self.options_for_select
-  order('LOWER(name)').map { |e| [e.name, e.id] }
 end
-
-end
-

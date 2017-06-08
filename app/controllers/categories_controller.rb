@@ -4,13 +4,9 @@ class CategoriesController < ApplicationController
   respond_to :html
 
   def index
-      @categories = Category.all
-  if params[:search]
-    @categories = Category.search(params[:search]).order("created_at DESC")
-  else
-    @categories = Category.all.order('created_at DESC')
-  end
-   
+    @categories = Category.page(params[:page]).per(20)
+
+    respond_with(@categories)
   end
 
   def show

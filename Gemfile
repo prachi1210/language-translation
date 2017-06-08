@@ -1,18 +1,13 @@
 source 'https://rubygems.org'
-# adding the filtering of the articles
-gem 'filterrific'
-# generate log file for users
-gem 'public_activity'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails' , '4.2.1'
 # Use PostgreSQL as the database for Active Record
 gem 'pg'
 # pg_search builds ActiveRecord named scopes that take advantage of PostgreSQL's full text search
 gem 'pg_search'
-# Use for uploading files and images.
+
 gem 'carrierwave'
-# Use for resizing of images in your rails application
-gem 'mini_magick'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -30,8 +25,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
-gem 'bootstrap-sass'
-gem 'react-bootstrap-rails'
+
 gem 'react-rails', '~> 1.0'
 
 # Use ActiveModel has_secure_password
@@ -97,6 +91,3 @@ group :test, :development do
 end
 
 gem 'memory_test_fix'
-gem 'rails_12factor', group: :production
-
-ruby '2.2.3'

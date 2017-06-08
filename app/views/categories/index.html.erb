@@ -10,23 +10,20 @@
 
 <main>
     <div class="AppControls">
-      <div class="AppControls--box AppControls-left">
-        <%= form_tag(categories_path, :method => "get", id: "search-form") do %>
-        <%= text_field_tag :search, params[:search], placeholder: "Search Categories" %>
-        <%= submit_tag "Search" %>
-        <% end %> 
-      </div>
-   
+        <div class="AppControls--box AppControls-left">
+            <form class="Form Form--inline AppControls-search">
+                <div class="Form-group">
+                    <input type="search" class="Form-control" id="search" placeholder="Search Categories" />
+                </div>
+                <button type="submit" class="btn btn-default icon-search">Search</button>
+            </form>
+        </div>
+
         <div class="AppControls--box AppControls-middle"></div>
 
         <div class="AppControls--box AppControls-right">
-
-
-         <% if can? :create, Category %>
-	    <a class="button--icontext button--ricontext" href="<%= new_category_path %>"><i class="icon-plus"></i> <span>New Category</span></a>
-              
-        <% end %>
-      </div>
+            <a class="button--icontext button--ricontext" href="<%= new_category_path %>"><i class="icon-plus"></i> <span>New Category</span></a>
+        </div>
     </div>
 
     <div class="CardListTable">
@@ -35,18 +32,24 @@
             <% @categories.each do |category| %>
                 <li>
                     <ul class="CardListTableRow">
-                        <li class="CardListTable-cal u-w300px" data-th="Name">
+                        <li class="CardListTable-cal u-w30px" data-th="#">
                             <div class="CardListTable-content">
                                 <% if can? :update, category %>
-                                    <%= link_to category.name, edit_category_path(category) %>
+                                    <%= link_to category.id, edit_category_path(category) %>
                                 <% else %>
-                                    <%= category.name %>
+                                    <%= category.id %>
                                 <% end %>
                             </div>
                         </li>
 
+                        <li class="CardListTable-cal u-w300px" data-th="Name">
+                            <div class="CardListTable-content">
+                                <%= category.name %>
+                            </div>
+                        </li>
+
                         <% if can? :update, category %>
-                            <li class="CardListTable-cal u-w60px" data-th="Action">
+                            <li class="CardListTable-cal CardListTable-cal--noheading u-w60px tar" data-th="Action">
                                 <div class="CardListTable-content">
                                     <div class="dropdown">
                                         <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="button--icon" href="#"><i class="icon-action"></i></a>
@@ -71,5 +74,5 @@
         </ul>
     </div>
 
- 
+    <%= paginate @categories %>
 </main>
