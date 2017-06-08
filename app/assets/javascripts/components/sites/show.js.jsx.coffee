@@ -83,7 +83,7 @@
       </header>
       <main>
         <div className="SitesShowBox">
-          <h1>{this.state.site.name} <span className="h4">{this.state.country.name}</span></h1>
+          <h2>{this.state.site.name} <span className="h4">{this.state.country.name}</span></h2>
           <br/>
           {alert}
           <VolunteersList data={this.state.volunteers} onRoleAddition={this.handleVolunteerAddition} onRoleRemoval={this.handleRoleRemoval}/>
@@ -106,16 +106,17 @@
     `<div className="VolunteersList">
       <h2>Volunteers</h2>
       <ul>
-        {userNodes}
+        
         <div className="col-md-5">
           <div className="input-group">
             <input type="text" className="form-control" placeholder="New volunteer's username" ref='username'/>
             <span className="input-group-btn">
-              <button onClick={this.handleRoleAddition} className="btn btn-default" type="button">Add!</button>
+              <button onClick={this.handleRoleAddition} className="btn btn-default" type="button">Add</button>
             </span>
           </div>
         </div>
         <br/><br/>
+        {userNodes}
       </ul>
     </div>`
 
@@ -133,16 +134,17 @@
     `<div className="ContributorsList">
       <h2>Contributors</h2>
       <ul>
-        {userNodes}
+        
         <div className="col-md-5">
           <div className="input-group">
             <input type="text" className="form-control" placeholder="New contributor's username" ref='username'/>
             <span className="input-group-btn">
-              <button onClick={this.handleRoleAddition} className="btn btn-default" type="button">Add!</button>
+              <button onClick={this.handleRoleAddition} className="btn btn-default" type="button">Add</button>
             </span>
           </div>
         </div>
         <br/><br/>
+        {userNodes}
       </ul>
     </div>`
 
@@ -151,8 +153,9 @@
     @props.onRoleRemoval({user_id: @props.user.id, act: "", site_id: -1})
   render: ->
     show_url = "/members/" + @props.user.id
-    `<li className="UserNode">
-        <a className="h4" href={show_url}>{this.props.user.first_name} {this.props.user.last_name} </a>
-        <span className="h6">{this.props.user.username}</span>
+    `<li type="square" className="UserNode">
+        <div className="style"><a className="h4" href={show_url}>{this.props.user.username} </a></div>
         <span className="glyphicon glyphicon-remove" onClick={this.handleRoleRemoval}></span>
-    </li>`
+        <br/><br/>
+        </li>`
+   

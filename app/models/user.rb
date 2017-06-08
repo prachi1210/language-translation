@@ -36,9 +36,18 @@
 #  organization_id        :integer
 #
 
-class User < ActiveRecord::Base
-  attr_accessor :no_invitation
 
+class User < ActiveRecord::Base
+  include PublicActivity::Model
+tracked owner: Proc.new{ |controller, model| controller && controller.current_user }
+
+  def self.search(search)
+    where("location iLIKE ?", "%#{search}%")
+    
+  end
+ 
+  attr_accessor :no_invitation
+  mount_uploader :avatar, AvatarUploader
   GENGER={male: "Male", female: "Female"}
 
   rolify
@@ -50,8 +59,20 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :validatable,
          :recoverable, :rememberable, :trackable, :token_authenticatable, :invitable
-
-  default_scope -> { order('created_at DESC') }
+  # User Avatar Validation
+  validates_integrity_of  :avatar
+  validates_processing_of :avatar
+ private
+    def avatar_size_validation
+      errors[:avatar] << "should be less than 500KB" if avatar.size > 0.5.megabytes
+    end
+   
+   def avatar_url(user)
+  if user.avatar_url.present?
+    user.avatar_url
+  end
+end
+ default_scope -> { order('created_at DESC') }
 
   validates_uniqueness_of :username
 
@@ -63,19 +84,7 @@ class User < ActiveRecord::Base
   after_create  :send_invitation
   before_save   :ensure_authentication_token
 
-  # PgSearch
-  pg_search_scope :user_search,
-    against: :tsv_data,
-    using: {
-        tsearch: {
-            dictionary: 'english',
-            any_word: true,
-            prefix: true,
-            tsvector_column: 'tsv_data'
-        }
-    }
-
-  private
+ private
   def send_invitation
     invite! if no_invitation=="0"
   end

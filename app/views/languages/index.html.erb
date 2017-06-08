@@ -11,19 +11,22 @@
 <main>
     <div class="AppControls">
         <div class="AppControls--box AppControls-left">
-            <form class="Form Form--inline AppControls-search">
-                <div class="Form-group">
-                    <input type="search" class="Form-control" id="search" placeholder="Search Languages" />
-                </div>
-                <button type="submit" class="btn btn-default icon-search">Search</button>
-            </form>
+	 <%= form_tag(languages_path, :method => "get", id: "search-form") do %>
+        <%= text_field_tag :search, params[:search], placeholder: "Search Languages" %>
+        <%= submit_tag "Search" %>
+        <% end %> 
+
         </div>
 
         <div class="AppControls--box AppControls-middle"></div>
 
         <div class="AppControls--box AppControls-right">
-            <a class="button--icontext button--ricontext" href="<%= new_language_path %>"><i class="icon-plus"></i> <span>New Language</span></a>
-        </div>
+	 <% if can? :create, Language %>
+           <a class="button--icontext button--ricontext" href="<%= new_language_path %>"><i class="icon-plus"></i> <span>New Language</span></a>
+              
+        <% end %>
+ 
+       </div>
     </div>
 
     <div class="CardListTable">
@@ -32,24 +35,20 @@
             <% @languages.each do |language| %>
                 <li>
                     <ul class="CardListTableRow">
-                        <li class="CardListTable-cal u-w30px" data-th="#">
+                        <li class="CardListTable-cal u-w300px" data-th="Name">
                             <div class="CardListTable-content">
                                 <% if can? :update, language %>
-                                    <%= link_to language.id, edit_language_path(language) %>
+                                    <%= link_to language.name, edit_language_path(language) %>
                                 <% else %>
-                                    <%= language.id %>
+                                    <%= language.name %>
                                 <% end %>
                             </div>
                         </li>
 
-                        <li class="CardListTable-cal u-w300px" data-th="Name">
-                            <div class="CardListTable-content">
-                                <%= language.name %>
-                            </div>
-                        </li>
+                        
 
                         <% if can? :update, language %>
-                            <li class="CardListTable-cal CardListTable-cal--noheading u-w60px tar" data-th="Action">
+                            <li class="CardListTable-cal u-w60px" data-th="Action">
                                 <div class="CardListTable-content">
                                     <div class="dropdown">
                                         <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="button--icon" href="#"><i class="icon-action"></i></a>
@@ -74,5 +73,5 @@
         </ul>
     </div>
 
-    <%= paginate @languages %>
+   
 </main>

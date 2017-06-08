@@ -15,9 +15,11 @@
 #
 
 class Article < ActiveRecord::Base
-  include PgSearch
+  
+include PublicActivity::Model
+tracked owner: Proc.new{ |controller, model| controller && controller.current_user }
 
-  belongs_to :language
+ belongs_to :language
   belongs_to :category
   has_many :audios
 
@@ -32,17 +34,24 @@ class Article < ActiveRecord::Base
 
   validates :picture, presence: true
 
-  # PgSearch
-  pg_search_scope :article_search,
-                  against: :tsv_data,
-                  using: {
-                      tsearch: {
-                          dictionary: 'english',
-                          any_word: true,
-                          prefix: true,
-                          tsvector_column: 'tsv_data'
-                      }
-                  }
-
   enum state:   [:draft, :published]
-end
+ filterrific(
+
+    available_filters: [
+   :with_language_id,
+   :with_category_id,
+    ]
+  )
+belongs_to :language
+ scope :with_language_id, lambda { |language_ids|
+    where(:language_id => [*language_ids])
+  }
+belongs_to :category
+  scope :with_category_id, lambda { |category_ids|
+    where(:category_id => [*category_ids])
+}
+
+  delegate :name, :to => :language, :prefix => true
+
+
+ end

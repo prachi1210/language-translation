@@ -15,7 +15,7 @@ SimpleNavigation::Configuration.run do |navigation|
 
     # Admins have access to their organization only
     if current_user and current_user.has_role? :admin
-      primary.item :organization, "My Organization", edit_organization_path(current_user.organization)
+      primary.item :organizations, "My Organization", organizations_path
     end
 
     # Superadmins, Admins have access to Countries. Admins have access to those that belong to their organization only.
@@ -34,9 +34,17 @@ SimpleNavigation::Configuration.run do |navigation|
       end
     end
 
+    # Superadmins, Admins have access to Assign role. 
+    if current_user and current_user.has_any_role? :superadmin, :admin
+      primary.item :sites, "Assign Role", sites_path, highlights_on: :subpath do |sub|
+        sub.dom_class = 'nav nav-pills'
+        sub.item :new_site, 'New site', new_site_path
+      end
+    end
+
     # Volunteers have access to the site they belong to.
     if current_user and current_user.has_role? :volunteer, :any
-      primary.item :sites, "My Site", site_path(Site.with_role(:volunteer, current_user).first)
+      primary.item :sites, "My Site", sites_path
     end
 
     # Superadmins, Admins, and Volunteers have access to all Languages.
@@ -53,6 +61,11 @@ SimpleNavigation::Configuration.run do |navigation|
         sub.dom_class = 'nav nav-pills'
         sub.item :new_category, 'New Category', new_category_path
       end
+    end
+
+# Superadmins, Admins have access to Activities..
+    if current_user and current_user.has_any_role? :superadmin, :admin
+      primary.item :activities, "Activities", activities_path
     end
 
     primary.dom_class = 'nav sidebarNav'

@@ -11,43 +11,36 @@
 <main>
     <div class="AppControls">
         <div class="AppControls--box AppControls-left">
-            <form class="Form Form--inline AppControls-search">
-                <div class="Form-group">
-                    <input type="search" class="Form-control" id="search" placeholder="Search Organizations" />
-                </div>
-                <button type="submit" class="btn btn-default icon-search">Search</button>
-            </form>
-        </div>
+       	 <%= form_tag(organizations_path, :method => "get", id: "search-form") do %>
+        <%= text_field_tag :search, params[:search], placeholder: "Search Languages" %>
+        <%= submit_tag "Search" %>
+        <% end %> 
+      </div>
 
         <div class="AppControls--box AppControls-middle"></div>
 
         <div class="AppControls--box AppControls-right">
-            <a class="button--icontext button--ricontext" href="<%= new_organization_path %>"><i class="icon-plus"></i> <span>New Organization</span></a>
+	<% if can? :create, Organization %>
+ <a class="button--icontext button--ricontext" href="<%= new_organization_path %>"><i class="icon-plus"></i> <span>New Organization</span></a>
+        <% end %>
         </div>
     </div>
 
     <div class="CardListTable">
         <ul class="CardListTable-body">
-
+           <h3> List of all Organisations</h3>
             <% @organizations.each do |organization| %>
                 <li>
                     <ul class="CardListTableRow">
-                        <li class="CardListTable-cal u-w30px" data-th="#">
+                        <li class="CardListTable-cal u-w300px">
                             <div class="CardListTable-content">
                                 <% if can? :update, organization %>
-                                    <%= link_to organization.id, edit_organization_path(organization) %>
-                                <% else %>
-                                    <%= organization.id %>
+				   <a class="button--icontext button--ricontext" href="<%=  edit_organization_path(organization) %>" <%= link_to organization.name %></a>
+                               <% else %>
+                                    <%= organization.name %>
                                 <% end %>
                             </div>
                         </li>
-
-                        <li class="CardListTable-cal u-w300px" data-th="Name">
-                            <div class="CardListTable-content">
-                                <%= organization.name %>
-                            </div>
-                        </li>
-
                         <% if can? :update, organization %>
                             <li class="CardListTable-cal CardListTable-cal--noheading u-w60px tar" data-th="Action">
                                 <div class="CardListTable-content">
@@ -73,6 +66,12 @@
             <% end %>
         </ul>
     </div>
-
-    <%= paginate @organizations %>
+    <div class="AppControls">
+         <div class="AppControls--box AppControls-right">
+	     <button class="button--icontext button--ricontext">
+     		 <%= link_to 'List of vounteers and contributors', sites_path %>
+    	    </button>
+    	</div>
+   </div>
+ 
 </main>

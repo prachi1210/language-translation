@@ -3,14 +3,13 @@ class UsersController < ApplicationController
   load_and_authorize_resource
 
   def index
-    if params[:q].blank?
-      @users = User.accessible_by(current_ability).page(params[:page]).per(20)
-    else
-      @users = User.accessible_by(current_ability).user_search(params[:q]).page(params[:page]).per(20)
-    end
-
-    @pagination = { current_page: @users.current_page, total_pages: @users.total_pages }
+     @users = User.accessible_by(current_ability)
+  if params[:search]
+    @users = User.search(params[:search]).order("created_at DESC")
+  else
+    @users = User.accessible_by(current_ability).order('created_at DESC')
   end
+ end
 
   def new
     @user = User.new
@@ -98,7 +97,15 @@ class UsersController < ApplicationController
       end
     end
   end
-
+def avatar_url(user)
+    if user.avatar_url.present?
+      user.avatar_url
+    else
+      default_url = "#{root_url}images/guest.png"
+      gravatar_id = Digest::MD5::hexdigest(user.email).downcase
+      "http://gravatar.com/avatar/#{gravatar_id}.png?s=48&d=#{CGI.escape(default_url)}"
+    end
+  end
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_user
@@ -107,6 +114,6 @@ class UsersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :username, :location, :lang, :contact, :gender, :no_invitation, :password)
+    params.require(:user).permit(:first_name, :last_name, :email, :username, :location, :lang, :contact, :gender, :no_invitation, :password, :avatar)
   end
 end

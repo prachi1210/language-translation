@@ -19,5 +19,8 @@
     "underscore": "~1.8.3",
     "react-bootstrap": "~0.24.3",
     "font-source-sans-pro": "~0.1.0"
+  },
+  "scripts": {
+    "postinstall": "./node_modules/bower/bin/bower install"
   }
 }

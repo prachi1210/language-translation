@@ -12,7 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap/dist/js/bootstrap
+//= require bootstrap
 //= require turbolinks
 //= require react
 //= require react_ujs
@@ -20,7 +20,8 @@
 //= require plugins/paginator
 //= require components
 //= require underscore
-
+//= require filterrific/filterrific-jquery
+//= require_tree
 //FIXME by Isuri
 
 $(document).ready(function(){
