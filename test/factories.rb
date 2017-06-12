@@ -33,11 +33,11 @@ FactoryGirl.define do
   factory :user do
     organization
     sequence(:email)          { |n| "test_user_#{n}@gmail.com" }
-    sequence(:first_name)     { |n| "Sherlock #{n}" }
-    sequence(:last_name)      { |n| "Holmes #{n}" }
+    sequence(:first_name)     { |n| "fname#{n}" }
+    sequence(:last_name)      { |n| "lname#{n}" }
     password                  "testing123"
     authentication_token      { Devise.friendly_token }
-    sequence(:username)       { |n| "uname_#{n}" }
+    sequence(:username)       { |n| "uname#{n}" }
     login_approval_at         { 2.weeks.ago }
   end
 

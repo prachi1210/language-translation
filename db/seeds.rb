@@ -24,7 +24,7 @@
         login_approval_at: Time.now, password: 'superadmin', password_confirmation: 'superadmin', email: 'super@ad.min'},
         { organization: organizations.third, username: 'volunteer', first_name: 'Vol', last_name: 'Unteer',
         login_approval_at: Time.now, password: 'volunteer', password_confirmation: 'volunteer', email: 'vol@un.teer'},
-        { organization: organizations.first, username: 'contributor', first_name: 'Con', last_name: 'Tributor',
+        { organization: organizations.first, username: 'contrib', first_name: 'Con', last_name: 'Tributor',
         login_approval_at: Time.now, password: 'contributor', password_confirmation: 'contributor', email: 'con@tri.butor'}
     ])
 
@@ -71,7 +71,4 @@
     User.find_by_username('admin2').add_role :admin
     User.find_by_username('superadmin').add_role :superadmin
     User.find_by_username('volunteer').add_role :volunteer, sites.fifth
-    User.find_by_username('contributor').add_role :contributor, sites.first
-
-
-
+    User.find_by_username('contrib').add_role :contributor, sites.first
