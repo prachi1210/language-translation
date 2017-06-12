@@ -8,6 +8,7 @@ Rails.application.config.assets.version = '1.0'
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
+
 # Rails.application.config.assets.precompile += %w( search.js )
 Rails.application.config.assets.precompile += %w( font-source-sans-pro/TTF/SourceSansPro-Bold.ttf )
 Rails.application.config.assets.precompile += %w( font-source-sans-pro/OTF/SourceSansPro-Bold.otf )
@@ -21,3 +22,4 @@ Rails.application.config.assets.precompile += %w( font-source-sans-pro/TTF/Sourc
 Rails.application.config.assets.precompile += %w( font-source-sans-pro/OTF/SourceSansPro-Regular.otf )
 Rails.application.config.assets.precompile += %w( font-source-sans-pro/EOT/SourceSansPro-Regular.eot )
 Rails.application.config.assets.precompile += %w( font-source-sans-pro/WOFF/OTF/SourceSansPro-Regular.otf.woff )
+Rails.application.config.assets.precompile += %w( mobile_menu.js )
