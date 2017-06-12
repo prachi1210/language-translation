@@ -43,9 +43,9 @@ tracked owner: Proc.new{ |controller, model| controller && controller.current_us
 
   def self.search(search)
     where("location iLIKE ?", "%#{search}%")
-    
+
   end
- 
+
   attr_accessor :no_invitation
   mount_uploader :avatar, AvatarUploader
   GENGER={male: "Male", female: "Female"}
@@ -66,7 +66,7 @@ tracked owner: Proc.new{ |controller, model| controller && controller.current_us
     def avatar_size_validation
       errors[:avatar] << "should be less than 500KB" if avatar.size > 0.5.megabytes
     end
-   
+
    def avatar_url(user)
   if user.avatar_url.present?
     user.avatar_url
@@ -78,7 +78,16 @@ end
 
   validates_presence_of :username, :first_name, :last_name, :organization_id
 
-  validates :contact, numericality: { only_integer: true , message: 'supports only digits' },:allow_blank => true
+  validates :contact, numericality: { only_integer: true, message: ' : Supports only Digits' }, :allow_blank => true
+
+  validates :username, :length => { :maximum => 10 }
+  validates :username, format: {with: /\A(?=.*[a-z])[a-z\d]+\Z/i, message: ' : Only alphaumeric characters allowed, but not purely numeric.'}
+
+  validates :first_name, :length => { :maximum => 10 }
+  validates :first_name, format: {with: /\A(?=.*[a-z])[a-z\d]+\Z/i, message: ' : Only alphaumeric characters allowed, but not purely numeric.'}
+
+  validates :last_name, :length => { :maximum => 10 }
+  validates :last_name, format: {with: /\A(?=.*[a-z])[a-z\d]+\Z/i, message: ' : Only alphaumeric characters allowed, but not purely numeric.'}
 
   # default order when calling the User model
   default_scope -> { order('created_at DESC') }
