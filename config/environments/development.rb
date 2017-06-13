@@ -44,4 +44,7 @@ Plt::Application.configure do config.react.variant = :development end
   # config.action_view.raise_on_missing_translations = true
 
   config.action_mailer.default_url_options = { host: 'localhost:3000' }
+
+  # config the environment for ember
+  config.ember.variant = :development
 end

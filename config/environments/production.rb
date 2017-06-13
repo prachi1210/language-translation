@@ -77,4 +77,7 @@ Plt::Application.configure do config.react.variant = :production end
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # config the environment for ember
+  config.ember.variant = :production
 end

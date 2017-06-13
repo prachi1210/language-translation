@@ -28,10 +28,15 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
 gem 'bootstrap-sass'
 gem 'react-bootstrap-rails'
+
+# add the ember in rails for front-end
+gem 'ember-rails'
+gem 'ember-source', '~> 1.8.1'
+gem 'emblem-rails'
+
+#add the react-rails
 gem 'react-rails', '~> 1.0'
 
 # Use ActiveModel has_secure_password
@@ -56,7 +61,7 @@ gem 'responders'
 gem 'devise', '~> 3.5.0'
 # An invitation strategy for devise
 gem 'devise_invitable', '~> 1.5.0'
-# Token Authenticatable module of devise. 
+# Token Authenticatable module of devise.
 gem 'devise-token_authenticatable', '~> 0.4.0'
 
 # Provides a way to specify default values for ActiveRecord models
