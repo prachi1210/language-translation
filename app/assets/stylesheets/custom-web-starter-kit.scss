@@ -420,22 +420,11 @@ main {
 
 .Info { margin-top: 0;
   background-color: #FFF; @include border-radius(3px); border: 1px solid #DDDDDD;
-  dt {
-        width: 120px;
-        float: left;
-        background-color: #E3E4E1;
-        padding: 7px 10px;
-        border-bottom: 1px solid #DDDDDD;
-        font-family: $fontHighlight;
-        @include ellipsis();
+  dt { width: 120px; float: left; background-color: #E3E4E1; padding: 7px 10px; border-bottom: 1px solid #DDDDDD; font-family: $fontHighlight; @include ellipsis();
         &:last-child { border: none; }
   }
 
-  dd {
-        padding: 7px 10px;
-        border-bottom: 1px solid #DDDDDD;
-        margin: 0 0 0 120px;
-        word-wrap: break-word;
+  dd { padding: 7px 10px; border-bottom: 1px solid #DDDDDD; margin: 0 0 0 120px; word-wrap: break-word;
         &:last-child { border: none; }
   }
 
@@ -443,9 +432,7 @@ main {
     dt { width: 185px; }
     dd { margin: 0 0 0 185px;  }
   }
-  .Info-more {
-    float: right;
-    text-decoration: none;
+  .Info-more { float: right; text-decoration: none;
     &:hover { text-decoration: underline; }
   }
 }
